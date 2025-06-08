@@ -1,0 +1,56 @@
+# .github/workflows/ci.yml
+name: CI - Build React & Spring Boot
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v3
+
+      - name: ⚙️ Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          
+      - name: Make mvnw executable
+        run: chmod +x ./backend/mvnw
+      - name: Debug current working directory
+        run: ls -la && pwd
+      - name: 🧪 Build Spring Boot backend
+        working-directory: ./backend
+        run: ./mvnw clean install -DskipTests
+
+      - name: 📦 Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: 🛑 Disable Rollup native binary
+        run: echo "ROLLUP_NO_BINARY=true" >> $GITHUB_ENV
+      - name: Clean dependencies
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
+        
+      - name: 🔧 Install React dependencies
+        working-directory: ./react-tailwind-admin-dashboard
+        run: npm install --save-dev @rollup/rollup-linux-x64-gnu@4.6.1
+      - name: 🔧 Install React dependencies
+        working-directory: ./react-tailwind-admin-dashboard
+        run: npm install --omit=optional
+
+      - name: Debug current working directory
+        run: ls -la && pwd
+      - name: 🧱 Build React frontend
+        working-directory: ./react-tailwind-admin-dashboard
+        run: npm run build
+
+      
