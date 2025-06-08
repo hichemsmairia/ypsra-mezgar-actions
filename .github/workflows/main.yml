@@ -45,7 +45,7 @@ jobs:
         run: npm install --save-dev @rollup/rollup-linux-x64-gnu@4.6.1
       - name: 🔧 Install React dependencies
         working-directory: ./react-tailwind-admin-dashboard
-        run: npm install --omit=optional
+        run: npm install 
 
       - name: Debug current working directory
         run: ls -la && pwd
