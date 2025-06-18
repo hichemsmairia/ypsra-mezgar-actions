@@ -13,6 +13,8 @@ import {
   FaInstagram,
   FaMoon,
   FaSun,
+  FaYoutube,
+  FaLinkedinIn,
 } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
@@ -347,84 +349,124 @@ const Home = () => {
       <section
         id="contact"
         ref={addToRefs}
-        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-100 pt-20 dark:from-gray-800 dark:to-gray-900"
+        className="relative min-h-screen flex items-center justify-center bg-[#192434] pt-20 overflow-hidden"
       >
-        <div className="max-w-4xl mx-auto px-6 py-20 text-center space-y-10 animate-fadeIn">
-          <h1 className="text-4xl md:text-5xl font-bold text-indigo-700 dark:text-indigo-400">
-            Contact Us
-          </h1>
-          <p className="text-lg text-slate-700 dark:text-gray-300">
-            We'd love to hear from you! Whether you have a question about
-            features, pricing, or anything else, our team is ready to answer all
-            your questions.
-          </p>
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-10">
+          <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-indigo-900 blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-blue-900 blur-3xl"></div>
+        </div>
 
-          <div className="flex flex-col md:flex-row justify-between text-left space-y-10 md:space-y-0 md:space-x-12">
-            <div className="flex items-start space-x-4">
-              <FaMapMarkerAlt
-                className="text-indigo-600 text-2xl mt-1 dark:text-indigo-400"
-                style={{ color: iconColor }}
-              />
-              <div>
-                <h2 className="font-semibold text-lg dark:text-white">
-                  Our Address
-                </h2>
-                <p className="text-slate-600 dark:text-gray-300">
-                  123 Virtual Tour Ave, New York, NY 10001
-                </p>
+        <div className="max-w-5xl mx-auto px-6 py-20 text-center space-y-12 animate-fadeIn relative z-10">
+          <div className="space-y-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-white bg-clip-text">
+              Get In Touch
+            </h1>
+            <div className="w-20 h-1.5 bg-indigo-500 mx-auto rounded-full"></div>
+            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              We'd love to hear from you! Whether you have a question about
+              features, pricing, or anything else, our team is ready to answer
+              all your questions.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            {/* Address Card */}
+            <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-700 hover:-translate-y-1 transition-transform">
+              <div className="flex items-start space-x-4">
+                <div className="p-3 bg-indigo-900/50 rounded-lg">
+                  <FaMapMarkerAlt className="text-indigo-400 text-xl" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-lg text-white mb-2">
+                    Our Address
+                  </h2>
+                  <p className="text-gray-400">
+                    123 Virtual Tour Ave
+                    <br />
+                    New York, NY 10001
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-start space-x-4">
-              <FaPhoneAlt
-                className="text-indigo-600 text-2xl mt-1 dark:text-indigo-400"
-                style={{ color: iconColor }}
-              />
-              <div>
-                <h2 className="font-semibold text-lg dark:text-white">
-                  Call Us
-                </h2>
-                <p className="text-slate-600 dark:text-gray-300">
-                  +1 (555) 123-4567
-                </p>
+            {/* Phone Card */}
+            <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-700 hover:-translate-y-1 transition-transform">
+              <div className="flex items-start space-x-4">
+                <div className="p-3 bg-indigo-900/50 rounded-lg">
+                  <FaPhoneAlt className="text-indigo-400 text-xl" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-lg text-white mb-2">
+                    Call Us
+                  </h2>
+                  <p className="text-gray-400">
+                    +1 (555) 123-4567
+                    <br />
+                    Mon-Fri, 9am-5pm EST
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-start space-x-4">
-              <FaEnvelope
-                className="text-indigo-600 text-2xl mt-1 dark:text-indigo-400"
-                style={{ color: iconColor }}
-              />
-              <div>
-                <h2 className="font-semibold text-lg dark:text-white">
-                  Email Us
-                </h2>
-                <p className="text-slate-600 dark:text-gray-300">
-                  info@virtual360tours.com
-                </p>
+            {/* Email Card */}
+            <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-700 hover:-translate-y-1 transition-transform">
+              <div className="flex items-start space-x-4">
+                <div className="p-3 bg-indigo-900/50 rounded-lg">
+                  <FaEnvelope className="text-indigo-400 text-xl" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-lg text-white mb-2">
+                    Email Us
+                  </h2>
+                  <p className="text-gray-400">
+                    info@virtual360tours.com
+                    <br />
+                    Response within 24 hours
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="pt-10 flex justify-center space-x-6">
-            <a
-              href="#"
-              className="text-indigo-600 hover:text-indigo-800 transition-colors dark:text-indigo-400 dark:hover:text-indigo-300"
-            >
-              <FaFacebookF className="text-2xl" style={{ color: iconColor }} />
-            </a>
-            <a
-              href="#"
-              className="text-indigo-600 hover:text-indigo-800 transition-colors dark:text-indigo-400 dark:hover:text-indigo-300"
-            >
-              <FaTwitter className="text-2xl" style={{ color: iconColor }} />
-            </a>
-            <a
-              href="#"
-              className="text-indigo-600 hover:text-indigo-800 transition-colors dark:text-indigo-400 dark:hover:text-indigo-300"
-            >
-              <FaInstagram className="text-2xl" style={{ color: iconColor }} />
-            </a>
+     
+
+          {/* Social Media */}
+          <div className="pt-8">
+            <p className="text-gray-400 mb-4">Follow us on social media</p>
+            <div className="flex justify-center space-x-6">
+              {[
+                {
+                  icon: <FaFacebookF className="text-xl" />,
+                  color: "bg-blue-600",
+                },
+                {
+                  icon: <FaTwitter className="text-xl" />,
+                  color: "bg-sky-500",
+                },
+                {
+                  icon: <FaInstagram className="text-xl" />,
+                  color: "bg-pink-600",
+                },
+                {
+                  icon: <FaLinkedinIn className="text-xl" />,
+                  color: "bg-blue-700",
+                },
+                {
+                  icon: <FaYoutube className="text-xl" />,
+                  color: "bg-red-600",
+                },
+              ].map((social, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className={`${social.color} text-white p-3 rounded-full hover:opacity-90 transition-opacity shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-transform`}
+                  aria-label={`${social.color.split("-")[1]} social media`}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -676,65 +718,125 @@ const Home = () => {
       <section
         id="contact"
         ref={addToRefs}
-        className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-100 pt-20"
+        className="relative min-h-screen flex items-center justify-center bg-[#192434] pt-20 overflow-hidden"
       >
-        <div className="max-w-4xl mx-auto px-6 py-20 text-center space-y-10 animate-fadeIn">
-          <h1 className="text-4xl md:text-5xl font-bold text-indigo-700">
-            Contact Us
-          </h1>
-          <p className="text-lg text-slate-700">
-            We'd love to hear from you! Whether you have a question about
-            features, pricing, or anything else, our team is ready to answer all
-            your questions.
-          </p>
+        {/* Decorative elements */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-10">
+          <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-indigo-900 blur-3xl"></div>
+          <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-blue-900 blur-3xl"></div>
+        </div>
 
-          <div className="flex flex-col md:flex-row justify-between text-left space-y-10 md:space-y-0 md:space-x-12">
-            <div className="flex items-start space-x-4">
-              <FaMapMarkerAlt className="text-indigo-600 text-2xl mt-1" />
-              <div>
-                <h2 className="font-semibold text-lg">Our Address</h2>
-                <p className="text-slate-600">
-                  123 Virtual Tour Ave, New York, NY 10001
-                </p>
+        <div className="max-w-5xl mx-auto px-6 py-20 text-center space-y-12 animate-fadeIn relative z-10">
+          <div className="space-y-6">
+            <h1 className="text-4xl md:text-6xl font-bold text-white bg-clip-text">
+              Get In Touch
+            </h1>
+            <div className="w-20 h-1.5 bg-indigo-500 mx-auto rounded-full"></div>
+            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+              We'd love to hear from you! Whether you have a question about
+              features, pricing, or anything else, our team is ready to answer
+              all your questions.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+            {/* Address Card */}
+            <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-700 hover:-translate-y-1 transition-transform">
+              <div className="flex items-start space-x-4">
+                <div className="p-3 bg-indigo-900/50 rounded-lg">
+                  <FaMapMarkerAlt className="text-indigo-400 text-xl" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-lg text-white mb-2">
+                    Our Address
+                  </h2>
+                  <p className="text-gray-400">
+                    123 Virtual Tour Ave
+                    <br />
+                    New York, NY 10001
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-start space-x-4">
-              <FaPhoneAlt className="text-indigo-600 text-2xl mt-1" />
-              <div>
-                <h2 className="font-semibold text-lg">Call Us</h2>
-                <p className="text-slate-600">+1 (555) 123-4567</p>
+            {/* Phone Card */}
+            <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-700 hover:-translate-y-1 transition-transform">
+              <div className="flex items-start space-x-4">
+                <div className="p-3 bg-indigo-900/50 rounded-lg">
+                  <FaPhoneAlt className="text-indigo-400 text-xl" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-lg text-white mb-2">
+                    Call Us
+                  </h2>
+                  <p className="text-gray-400">
+                    +1 (555) 123-4567
+                    <br />
+                    Mon-Fri, 9am-5pm EST
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-start space-x-4">
-              <FaEnvelope className="text-indigo-600 text-2xl mt-1" />
-              <div>
-                <h2 className="font-semibold text-lg">Email Us</h2>
-                <p className="text-slate-600">info@virtual360tours.com</p>
+            {/* Email Card */}
+            <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-700 hover:-translate-y-1 transition-transform">
+              <div className="flex items-start space-x-4">
+                <div className="p-3 bg-indigo-900/50 rounded-lg">
+                  <FaEnvelope className="text-indigo-400 text-xl" />
+                </div>
+                <div>
+                  <h2 className="font-semibold text-lg text-white mb-2">
+                    Email Us
+                  </h2>
+                  <p className="text-gray-400">
+                    info@virtual360tours.com
+                    <br />
+                    Response within 24 hours
+                  </p>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="pt-10 flex justify-center space-x-6">
-            <a
-              href="#"
-              className="text-indigo-600 hover:text-indigo-800 transition-colors"
-            >
-              <FaFacebookF className="text-2xl" />
-            </a>
-            <a
-              href="#"
-              className="text-indigo-600 hover:text-indigo-800 transition-colors"
-            >
-              <FaTwitter className="text-2xl" />
-            </a>
-            <a
-              href="#"
-              className="text-indigo-600 hover:text-indigo-800 transition-colors"
-            >
-              <FaInstagram className="text-2xl" />
-            </a>
+          {/* Contact Form */}
+          
+
+          {/* Social Media */}
+          <div className="pt-8">
+            <p className="text-gray-400 mb-4">Follow us on social media</p>
+            <div className="flex justify-center space-x-6">
+              {[
+                {
+                  icon: <FaFacebookF className="text-xl" />,
+                  color: "bg-blue-600",
+                },
+                {
+                  icon: <FaTwitter className="text-xl" />,
+                  color: "bg-sky-500",
+                },
+                {
+                  icon: <FaInstagram className="text-xl" />,
+                  color: "bg-pink-600",
+                },
+                {
+                  icon: <FaLinkedinIn className="text-xl" />,
+                  color: "bg-blue-700",
+                },
+                {
+                  icon: <FaYoutube className="text-xl" />,
+                  color: "bg-red-600",
+                },
+              ].map((social, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className={`${social.color} text-white p-3 rounded-full hover:opacity-90 transition-opacity shadow-md hover:shadow-lg transform hover:-translate-y-1 transition-transform`}
+                  aria-label={`${social.color.split("-")[1]} social media`}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>

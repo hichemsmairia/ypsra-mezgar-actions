@@ -1,4 +1,4 @@
-import { useTheme } from "../../context/ThemeContext";
+import { useTheme } from "../../../redux/hooks/useTheme";
 
 export default function ThemeTogglerTwo() {
   const { toggleTheme } = useTheme();

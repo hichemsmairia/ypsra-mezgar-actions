@@ -27,6 +27,7 @@
     "@react-three/fiber": "8.13.0",
     "@reduxjs/toolkit": "^2.6.1",
     "@tailwindcss/forms": "^0.5.10",
+    "@testing-library/user-event": "^14.6.1",
     "@types/d3": "^7.4.3",
     "@types/topojson-client": "^3.1.5",
     "apexcharts": "^4.1.0",

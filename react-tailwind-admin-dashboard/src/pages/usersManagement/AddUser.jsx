@@ -94,7 +94,7 @@ const AddUser = () => {
               Password
             </label>
             <input
-              type="password"
+              type="text"
               id="password"
               name="password"
               value={formData.password}

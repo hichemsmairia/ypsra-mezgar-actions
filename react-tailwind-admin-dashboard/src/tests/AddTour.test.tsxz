@@ -1,0 +1,394 @@
+// import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+// import {
+//   render,
+//   screen,
+//   fireEvent,
+//   waitFor,
+//   within,
+// } from "@testing-library/react";
+// import userEvent from "@testing-library/user-event";
+// import AddTour from "../pages/toursManagement/AddTour";
+// import * as THREE from "three";
+// import { Canvas } from "@react-three/fiber";
+// import { OrbitControls, Html } from "@react-three/drei";
+
+// // Mock external dependencies
+// vi.mock("three");
+// vi.mock("@react-three/fiber");
+// vi.mock("@react-three/drei");
+
+// // Mock services
+// vi.mock("../services/TourServices", () => ({
+//   createTour: vi.fn(),
+//   updateTour: vi.fn(),
+// }));
+
+// vi.mock("../services/SceneServices", () => ({
+//   uploadScene: vi.fn(),
+//   saveScenes: vi.fn(),
+// }));
+
+// vi.mock("../services/PlanServices", () => ({
+//   uploadPlan: vi.fn(),
+// }));
+
+// vi.mock("../services/AuthServices", () => ({
+//   register: vi.fn(),
+// }));
+
+// vi.mock("../services/UserServices", () => ({
+//   fetchUsers: vi.fn(),
+// }));
+
+// // Mock components
+// vi.mock("./Maps", () => ({
+//   __esModule: true,
+//   default: () => <div>Mock Map Component</div>,
+// }));
+
+// vi.mock("./Contact", () => ({
+//   __esModule: true,
+//   default: ({ onContactInfosChange, initialData }: any) => (
+//     <div>
+//       Mock Contact Component
+//       <button onClick={() => onContactInfosChange({ test: "contact" })}>
+//         Simulate Contact Change
+//       </button>
+//     </div>
+//   ),
+// }));
+
+// vi.mock("./Modal", () => ({
+//   __esModule: true,
+//   default: ({ isOpen, children, onClose, onSave, title }: any) =>
+//     isOpen && (
+//       <div>
+//         <h2>{title}</h2>
+//         {children}
+//         <button onClick={onClose}>Close Modal</button>
+//         <button onClick={onSave}>Save Modal</button>
+//       </div>
+//     ),
+// }));
+
+// vi.mock("../../layout/AdminLayout", () => ({
+//   __esModule: true,
+//   default: ({ children }: any) => <div>Admin Layout {children}</div>,
+// }));
+
+// vi.mock("../../layout/OwnerLayout", () => ({
+//   __esModule: true,
+//   default: ({ children }: any) => <div>Owner Layout {children}</div>,
+// }));
+
+// // Mock react-redux
+// vi.mock("react-redux", () => ({
+//   useSelector: vi.fn(),
+//   useDispatch: vi.fn(),
+// }));
+
+// beforeEach(() => {
+//   // Reset all mocks
+//   vi.resetAllMocks();
+
+//   // Setup mock implementations
+//   const { useSelector } = require("react-redux");
+//   const { createTour, updateTour } = require("../../services/TourServices");
+//   const { uploadScene, saveScenes } = require("../../services/SceneServices");
+//   const { uploadPlan } = require("../../services/PlanServices");
+//   const { fetchUsers } = require("../../services/UserServices");
+
+//   // Mock Redux store
+//   useSelector.mockImplementation((selector) =>
+//     selector({
+//       auth: {
+//         user: {
+//           id: "user123",
+//           roles: ["owner"],
+//           username: "testuser",
+//         },
+//       },
+//     })
+//   );
+
+//   // Setup service mocks
+//   createTour.mockResolvedValue({ id: "tour123" });
+//   updateTour.mockResolvedValue({});
+//   uploadScene.mockResolvedValue({ id: "scene123", textureUrl: "scene-url" });
+//   saveScenes.mockResolvedValue([{ id: "saved-scene123" }]);
+//   uploadPlan.mockResolvedValue({ id: "plan123" });
+//   fetchUsers.mockResolvedValue([
+//     { id: "user1", username: "user1" },
+//     { id: "user2", username: "user2" },
+//   ]);
+// });
+
+// afterEach(() => {
+//   vi.clearAllMocks();
+// });
+
+// describe("AddTour Component", () => {
+//   it("renders without crashing", () => {
+//     render(<AddTour />);
+//     expect(screen.getByText("Créer un Tour Virtuel")).toBeInTheDocument();
+//   });
+
+//   it("displays the tour name input field", () => {
+//     render(<AddTour />);
+//     expect(screen.getByLabelText("Nom du Tour")).toBeInTheDocument();
+//   });
+
+//   it("allows entering a tour name", async () => {
+//     render(<AddTour />);
+//     const input = screen.getByLabelText("Nom du Tour");
+//     await userEvent.type(input, "My Test Tour");
+//     expect(input).toHaveValue("My Test Tour");
+//   });
+
+//   it("calls createTour when the create button is clicked", async () => {
+//     render(<AddTour />);
+//     const input = screen.getByLabelText("Nom du Tour");
+//     await userEvent.type(input, "My Test Tour");
+//     await userEvent.click(screen.getByText("Créer Tour"));
+
+//     await waitFor(() => {
+//       const { createTour } = require("../../services/TourServices");
+//       expect(createTour).toHaveBeenCalledWith({
+//         ownerId: "user123",
+//         tourName: "My Test Tour",
+//         plans: [],
+//       });
+//     });
+//   });
+
+//   it("shows error message when trying to create tour without name", async () => {
+//     render(<AddTour />);
+//     await userEvent.click(screen.getByText("Créer Tour"));
+//     expect(
+//       screen.getByText("Veuillez entrer un nom pour le tour.")
+//     ).toBeInTheDocument();
+//   });
+
+//   it("disables scene upload until tour is created", async () => {
+//     render(<AddTour />);
+//     const uploadButton = screen.getByLabelText(/Scènes/);
+//     expect(uploadButton).toBeDisabled();
+//   });
+
+//   it("enables scene upload after tour is created", async () => {
+//     render(<AddTour />);
+//     const input = screen.getByLabelText("Nom du Tour");
+//     await userEvent.type(input, "My Test Tour");
+//     await userEvent.click(screen.getByText("Créer Tour"));
+
+//     await waitFor(() => {
+//       const uploadButton = screen.getByLabelText(/Scènes/);
+//       expect(uploadButton).not.toBeDisabled();
+//     });
+//   });
+
+//   it("handles scene image upload", async () => {
+//     render(<AddTour />);
+
+//     // First create a tour
+//     const input = screen.getByLabelText("Nom du Tour");
+//     await userEvent.type(input, "My Test Tour");
+//     await userEvent.click(screen.getByText("Créer Tour"));
+
+//     await waitFor(() => {
+//       const { createTour } = require("../../services/TourServices");
+//       expect(createTour).toHaveBeenCalled();
+//     });
+
+//     // Mock file
+//     const file = new File(["test"], "test.png", { type: "image/png" });
+//     const uploadButton = screen.getByLabelText(/Scènes/);
+
+//     fireEvent.change(uploadButton, { target: { files: [file] } });
+
+//     await waitFor(() => {
+//       const { uploadScene } = require("../../services/SceneServices");
+//       expect(uploadScene).toHaveBeenCalled();
+//     });
+//   });
+
+//   it("opens and closes the map modal", async () => {
+//     render(<AddTour />);
+
+//     // Modal should not be open initially
+//     expect(screen.queryByText("Localisation du Tour")).not.toBeInTheDocument();
+
+//     // Click the map button to open modal
+//     await userEvent.click(screen.getByText("Maps"));
+
+//     // Modal should now be open
+//     expect(screen.getByText("Localisation du Tour")).toBeInTheDocument();
+
+//     // Close the modal
+//     await userEvent.click(screen.getByText("Close Modal"));
+
+//     // Modal should be closed again
+//     expect(screen.queryByText("Localisation du Tour")).not.toBeInTheDocument();
+//   });
+
+//   it("opens and closes the contact modal", async () => {
+//     render(<AddTour />);
+
+//     // Modal should not be open initially
+//     expect(
+//       screen.queryByText("Informations de Contact")
+//     ).not.toBeInTheDocument();
+
+//     // Click the contact button to open modal
+//     await userEvent.click(screen.getByText("Contact"));
+
+//     // Modal should now be open
+//     expect(screen.getByText("Informations de Contact")).toBeInTheDocument();
+
+//     // Close the modal
+//     await userEvent.click(screen.getByText("Close Modal"));
+
+//     // Modal should be closed again
+//     expect(
+//       screen.queryByText("Informations de Contact")
+//     ).not.toBeInTheDocument();
+//   });
+
+//   it("handles plan image upload", async () => {
+//     render(<AddTour />);
+
+//     // First create a tour
+//     const input = screen.getByLabelText("Nom du Tour");
+//     await userEvent.type(input, "My Test Tour");
+//     await userEvent.click(screen.getByText("Créer Tour"));
+
+//     await waitFor(() => {
+//       const { createTour } = require("../../services/TourServices");
+//       expect(createTour).toHaveBeenCalled();
+//     });
+
+//     // Mock file
+//     const file = new File(["test"], "plan.png", { type: "image/png" });
+//     const uploadButton = screen.getByLabelText(/Plan/);
+
+//     fireEvent.change(uploadButton, { target: { files: [file] } });
+
+//     await waitFor(() => {
+//       expect(screen.getByText("Image du plan:")).toBeInTheDocument();
+//     });
+//   });
+
+//   it("shows user select for admin role", async () => {
+//     // Mock admin user
+//     const { useSelector } = require("react-redux");
+//     useSelector.mockImplementation((selector) =>
+//       selector({
+//         auth: {
+//           user: {
+//             id: "admin123",
+//             roles: ["ADMIN"],
+//             username: "adminuser",
+//           },
+//         },
+//       })
+//     );
+
+//     render(<AddTour />);
+
+//     await waitFor(() => {
+//       expect(screen.getByText("Utilisateur")).toBeInTheDocument();
+//       expect(
+//         screen.getByText("Sélectionner un utilisateur")
+//       ).toBeInTheDocument();
+//     });
+//   });
+
+//   it("saves all data when save button is clicked", async () => {
+//     render(<AddTour />);
+
+//     // First create a tour
+//     const input = screen.getByLabelText("Nom du Tour");
+//     await userEvent.type(input, "My Test Tour");
+//     await userEvent.click(screen.getByText("Créer Tour"));
+
+//     await waitFor(() => {
+//       const { createTour } = require("../../services/TourServices");
+//       expect(createTour).toHaveBeenCalled();
+//     });
+
+//     // Upload a scene
+//     const sceneFile = new File(["scene"], "scene.png", { type: "image/png" });
+//     const sceneUploadButton = screen.getByLabelText(/Scènes/);
+//     fireEvent.change(sceneUploadButton, { target: { files: [sceneFile] } });
+
+//     // Upload a plan
+//     const planFile = new File(["plan"], "plan.png", { type: "image/png" });
+//     const planUploadButton = screen.getByLabelText(/Plan/);
+//     fireEvent.change(planUploadButton, { target: { files: [planFile] } });
+
+//     // Open and save map data
+//     await userEvent.click(screen.getByText("Maps"));
+//     await userEvent.click(screen.getByText("Save Modal"));
+
+//     // Open and save contact data
+//     await userEvent.click(screen.getByText("Contact"));
+//     await userEvent.click(screen.getByText("Simulate Contact Change"));
+//     await userEvent.click(screen.getByText("Save Modal"));
+
+//     // Click save all button
+//     await userEvent.click(screen.getByText("Sauvegarder Tour, Scènes et Plan"));
+
+//     await waitFor(() => {
+//       const { updateTour } = require("../../services/TourServices");
+//       expect(updateTour).toHaveBeenCalled();
+//     });
+//   });
+
+//   it("shows error message when trying to save without plan image", async () => {
+//     render(<AddTour />);
+
+//     // First create a tour
+//     const input = screen.getByLabelText("Nom du Tour");
+//     await userEvent.type(input, "My Test Tour");
+//     await userEvent.click(screen.getByText("Créer Tour"));
+
+//     await waitFor(() => {
+//       const { createTour } = require("../../services/TourServices");
+//       expect(createTour).toHaveBeenCalled();
+//     });
+
+//     // Try to save without plan
+//     await userEvent.click(screen.getByText("Sauvegarder Tour, Scènes et Plan"));
+
+//     expect(
+//       screen.getByText(/Veuillez d'abord créer un tour/)
+//     ).toBeInTheDocument();
+//   });
+
+//   it("allows adding hotspots to scenes", async () => {
+//     render(<AddTour />);
+
+//     // Create tour
+//     const input = screen.getByLabelText("Nom du Tour");
+//     await userEvent.type(input, "My Test Tour");
+//     await userEvent.click(screen.getByText("Créer Tour"));
+
+//     // Upload a scene
+//     const sceneFile = new File(["scene"], "scene.png", { type: "image/png" });
+//     const sceneUploadButton = screen.getByLabelText(/Scènes/);
+//     fireEvent.change(sceneUploadButton, { target: { files: [sceneFile] } });
+
+//     await waitFor(() => {
+//       expect(screen.getByText("1")).toBeInTheDocument();
+//     });
+
+//     // Click on the scene to select it
+//     await userEvent.click(screen.getByAltText(/preview-scene-url/));
+
+//     // Click to add hotspot
+//     await userEvent.click(screen.getByText("Ajouter Hotspot à la Scène"));
+
+//     // Should show hotspot form
+//     expect(screen.getByText("Scène de destination")).toBeInTheDocument();
+//   });
+// });

@@ -241,7 +241,7 @@ const TourViewer = () => {
       <audio
         ref={audioRef}
         loop
-        src="/path/to/your/audio-file.mp3"
+        src="/music.mp3"
         style={{ display: "none" }}
       />
 

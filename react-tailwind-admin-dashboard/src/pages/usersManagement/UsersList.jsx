@@ -323,7 +323,7 @@ const UsersList = () => {
                     Password
                   </label>
                   <input
-                    type="password"
+                    type="text"
                     name="password"
                     value={newUser.password}
                     onChange={(e) =>

@@ -3,6 +3,7 @@ import authReducer from "../slices/authSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
+import themeReducer from "../slices/themeSlice";
 
 const persistConfig = {
   key: "root",
@@ -11,6 +12,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: persistReducer(persistConfig, authReducer),
+  theme: persistReducer(persistConfig, themeReducer),
 });
 
 export const store = configureStore({

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { store } from "../../redux/store/store";
 
-const API_URL = "http://localhost:8080/api";
+const API_URL_ENV = import.meta.env.VITE_API_URL;
+
+const API_URL = `${API_URL_ENV}`;
 
 // Create axios instance
 const api = axios.create({
@@ -43,7 +45,7 @@ export const uploadPlan = async (file, planHotspots) => {
   formData.append("planHotspots", JSON.stringify(hotspotsArray));
 
   try {
-    const response = await api.post("/plans/upload_plan", formData, {
+    const response = await api.post("/api/plans/upload_plan", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -57,7 +59,7 @@ export const uploadPlan = async (file, planHotspots) => {
 
 export const savePlans = async (scenes) => {
   try {
-    const response = await api.post("/plans/save", scenes);
+    const response = await api.post("/api/plans/save", scenes);
     return response.data;
   } catch (error) {
     console.error("Error saving scenes:", error);
@@ -67,7 +69,7 @@ export const savePlans = async (scenes) => {
 
 export const deletePlanById = async (planId) => {
   try {
-    const response = await api.delete(`/plans/delete/${planId}`);
+    const response = await api.delete(`/api/plans/delete/${planId}`);
     return response.data;
   } catch (error) {
     console.error("Error deleting plan:", error);

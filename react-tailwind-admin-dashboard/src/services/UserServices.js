@@ -2,9 +2,11 @@
 import axios from "axios";
 import { store } from "../../redux/store/store";
 
-// Create axios instance with base configuration
+const API_URL_ENV = import.meta.env.VITE_API_URL;
+
+const API_URL = `${API_URL_ENV}`;
 const api = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: `${API_URL}/api`,
   timeout: 10000, // 10 seconds timeout
 });
 

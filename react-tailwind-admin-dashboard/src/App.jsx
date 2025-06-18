@@ -28,11 +28,13 @@ import HomeOwner from "./pages/Dashboard/HomeOwner.tsx";
 import Home from "./pages/home/Home.jsx";
 import OwnerResponsableManagement from "./pages/ownerResponsablesManagement/OwnerResponsableManagement.jsx";
 import ToursListOwner from "./pages/toursManagement/ToursListOwner.jsx";
+import ThemeInitializer from "../redux/ThemeInitializer.tsx";
 
 export default function App() {
   return (
     <>
       <ToastContainer />
+      <ThemeInitializer />
       <Router>
         <ScrollToTop />
         <Routes>

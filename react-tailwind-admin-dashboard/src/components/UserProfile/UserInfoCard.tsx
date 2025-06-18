@@ -149,29 +149,8 @@ export default function UserInfoCard() {
                     />
                   </div>
 
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Email Address</Label>
-                    <Input
-                      type="text"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                    />
-                  </div>
-                  <div className="col-span-2 lg:col-span-1">
-                    <Label>Password</Label>
-                    <Input
-                      type="text"
-                      value={formData.newPassword}
-                      onChange={(e) =>
-                        setFormData({
-                          ...formData,
-                          newPassword: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
+                  
+                 
                 </div>
               </div>
             </div>

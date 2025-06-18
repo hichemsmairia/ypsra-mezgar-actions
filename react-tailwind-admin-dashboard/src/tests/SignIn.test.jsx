@@ -9,6 +9,15 @@ import { toast } from "react-toastify";
 import { vi } from "vitest";
 import { ThemeProvider } from "../context/ThemeContext";
 
+import axios from "axios";
+vi.mock("axios");
+
+axios.get.mockResolvedValue({
+  data: [
+    /* your mock tours */
+  ],
+});
+
 // Mock react-toastify toast functions
 vi.mock("react-toastify", () => ({
   toast: {
@@ -48,7 +57,7 @@ describe("SignIn component", () => {
 
     expect(screen.getByText(/Sign In Page/i)).toBeInTheDocument();
     expect(
-      screen.getByPlaceholderText(/Enter your username/i)
+      screen.getByPlaceholderText(/Enter your email/i)
     ).toBeInTheDocument();
     expect(
       screen.getByPlaceholderText(/Enter your password/i)
@@ -61,7 +70,7 @@ describe("SignIn component", () => {
   test("allows typing in inputs and toggling password visibility", () => {
     renderComponent();
 
-    const emailInput = screen.getByPlaceholderText(/Enter your username/i);
+    const emailInput = screen.getByPlaceholderText(/Enter your email/i);
     const passwordInput = screen.getByPlaceholderText(/Enter your password/i);
 
     fireEvent.change(emailInput, { target: { value: "testuser" } });
@@ -96,7 +105,7 @@ describe("SignIn component", () => {
   test("dispatches loginUser action on form submit", () => {
     renderComponent();
 
-    fireEvent.change(screen.getByPlaceholderText(/Enter your username/i), {
+    fireEvent.change(screen.getByPlaceholderText(/Enter your email/i), {
       target: { value: "testuser" },
     });
     fireEvent.change(screen.getByPlaceholderText(/Enter your password/i), {
@@ -112,7 +121,7 @@ describe("SignIn component", () => {
   test("logs in with admin credentials and updates Redux state", async () => {
     renderComponent();
 
-    fireEvent.change(screen.getByPlaceholderText(/enter your username/i), {
+    fireEvent.change(screen.getByPlaceholderText(/enter your email/i), {
       target: { value: "admin@gmail.com" },
     });
 

@@ -72,43 +72,57 @@ export default function SignIn() {
                   Sign In Page
                 </h1>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Enter your username and password
+                  Enter your email and password
                 </p>
               </div>
 
               <form onSubmit={handleSubmit}>
                 <div className="space-y-6">
+                  {/* Email Field */}
                   <div>
-                    <Label>
-                      Username <span className="text-error-500">*</span>
+                    <Label
+                      htmlFor="email_input"
+                      className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
+                      E-mail <span className="text-error-500">*</span>
                     </Label>
                     <input
                       type="text"
                       name="email"
+                      id="email_input"
                       value={credentials.email}
                       onChange={handleChange}
-                      placeholder="enter your username"
+                      placeholder="Enter your email"
                       required
-                      id="email_input"
+                      className="mt-2 w-full px-4 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                     />
                   </div>
+
+                  {/* Password Field */}
                   <div>
-                    <Label>
+                    <Label
+                      htmlFor="password_input"
+                      className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                    >
                       Password <span className="text-error-500">*</span>
                     </Label>
-                    <div className="relative">
+                    <div className="relative mt-2">
                       <input
                         type={showPassword ? "text" : "password"}
                         name="password"
+                        id="password_input"
                         value={credentials.password}
                         onChange={handleChange}
-                        placeholder="enter your password"
+                        placeholder="Enter your password"
                         required
-                        id="password_input"
+                        className="w-full px-4 py-2 text-sm bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
                       />
                       <span
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
+                        aria-label={
+                          showPassword ? "Hide password" : "Show password"
+                        }
                       >
                         {showPassword ? (
                           <EyeIcon className="fill-gray-500 dark:fill-gray-400 size-5" />
@@ -118,8 +132,14 @@ export default function SignIn() {
                       </span>
                     </div>
                   </div>
+
+                  {/* Submit Button */}
                   <div>
-                    <Button type="submit" className="w-full" size="sm">
+                    <Button
+                      type="submit"
+                      className="w-full bg-green-500 hover:bg-green-600 text-white"
+                      size="sm"
+                    >
                       Sign in
                     </Button>
                   </div>
