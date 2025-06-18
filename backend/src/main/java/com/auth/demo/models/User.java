@@ -22,8 +22,13 @@ public class User {
     private String password;
     private Set<String> roles = new HashSet<>();
     private LocalDateTime timeStamp = LocalDateTime.now(); 
-    private String image = "default.jpg"  ;
+    private String image = "default.jpg";
     
+    
+    public void addRole(String role) {
+        this.roles.add(role);
+    }
+
     public String getId() {
         return id != null ? id.toString() : null;
     }
