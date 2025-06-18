@@ -1,6 +1,7 @@
 # .github/workflows/ci.yml
 name: CI - Build React & Spring Boot
-
+env:
+  TAILWIND_DISABLE_OXIDE: true
 on:
   push:
     branches: [ main ]
