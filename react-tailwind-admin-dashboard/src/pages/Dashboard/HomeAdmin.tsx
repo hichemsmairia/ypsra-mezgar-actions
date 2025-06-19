@@ -1,7 +1,6 @@
 import MonthlySalesChart from "../../components/visiteAdmin/MonthlySalesChart";
 import DemographicCard from "../../components/visiteAdmin/DemographicCard";
 import PageMeta from "../../components/common/PageMeta";
-import UserTypePieChart from "../../components/visiteAdmin/UserTypePieChart";
 import AdminMonthlyVisitChart from "../../components/visiteAdmin/MonthlyRegistrationsChart";
 import { useEffect, useState } from "react";
 

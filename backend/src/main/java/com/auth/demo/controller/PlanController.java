@@ -23,7 +23,7 @@ public class PlanController {
             @RequestParam("planHotspots") String planHotspotsJson,
             Authentication authentication // This will be automatically populated if user is authenticated
     ) {
-        try {
+        try {  
             // You can access the authenticated user's email if needed
             String userEmail = authentication.getName();
             System.out.println("Uploading plan for user: " + userEmail);

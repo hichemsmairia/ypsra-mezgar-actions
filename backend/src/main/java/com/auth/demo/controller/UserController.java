@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -36,6 +37,7 @@ public class UserController {
     @Operation(summary = "Récupérer tous les utilisateurs (sauf admin)", description = "Renvoie une liste de tous les utilisateurs enregistrés sauf les administrateurs.")
     @ApiResponse(responseCode = "200", description = "Liste des utilisateurs récupérée avec succès")
     @GetMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers()
                 .stream()

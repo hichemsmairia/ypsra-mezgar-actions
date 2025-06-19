@@ -4,6 +4,7 @@ import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
 import themeReducer from "../slices/themeSlice";
+import sidebarReducer from "../slices/sidebarSlice";
 
 const persistConfig = {
   key: "root",
@@ -13,6 +14,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   auth: persistReducer(persistConfig, authReducer),
   theme: persistReducer(persistConfig, themeReducer),
+  sidebar: persistReducer(persistConfig, sidebarReducer),
 });
 
 export const store = configureStore({

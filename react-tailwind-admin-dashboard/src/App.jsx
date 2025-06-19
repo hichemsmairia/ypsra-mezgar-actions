@@ -3,9 +3,6 @@ import SignIn from "./pages/AuthPages/SignIn";
 import NotFound from "./pages/OtherPage/NotFound";
 import UserProfiles from "./pages/UserProfiles";
 
-import LineChart from "./pages/Charts/LineChart";
-import BarChart from "./pages/Charts/BarChart";
-
 import { ScrollToTop } from "./components/common/ScrollToTop";
 import ToursList from "./pages/toursManagement/ToursList.jsx";
 import AddTour from "./pages/toursManagement/AddTour.jsx";
@@ -49,9 +46,7 @@ export default function App() {
               </ProtectedRoute>
             }
           />
-          {/* Charts */}
-          <Route path="/line-chart" element={<LineChart />} />
-          <Route path="/bar-chart" element={<BarChart />} />
+          
           {/* Auth Layout */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/" element={<Home />} />

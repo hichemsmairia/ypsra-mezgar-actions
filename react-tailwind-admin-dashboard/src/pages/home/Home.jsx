@@ -20,7 +20,8 @@ import { NavLink, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../redux/slices/authSlice";
 import { fetchTours } from "../../services/TourServices";
-
+//------------------------------
+import ThemeTogglerTwo from '../../components/common/ThemeTogglerTwo' 
 const Home = () => {
   const [activeSection, setActiveSection] = useState("Home");
   const [darkMode, setDarkMode] = useState(false);
@@ -109,17 +110,8 @@ const Home = () => {
             ))}
           </div>
           <div className="hidden md:flex space-x-4 items-center">
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? (
-                <FaSun title="sun" className="text-yellow-400" />
-              ) : (
-                <FaMoon title="moon" className="text-gray-600" />
-              )}
-            </button>
+            <ThemeTogglerTwo />
+           
             {!user ? (
               <>
                 <button
@@ -428,8 +420,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-
-     
 
           {/* Social Media */}
           <div className="pt-8">
@@ -799,7 +789,6 @@ const Home = () => {
           </div>
 
           {/* Contact Form */}
-          
 
           {/* Social Media */}
           <div className="pt-8">
